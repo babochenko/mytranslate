@@ -7,6 +7,9 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 620,
     height: 420,
+    icon: process.platform === 'darwin'
+      ? path.join(__dirname, 'assets', 'icon.icns')
+      : path.join(__dirname, 'assets', 'icon.png'),
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false

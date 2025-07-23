@@ -29,6 +29,7 @@
   "build": {
     "appId": "com.mytranslate.app",
     "productName": "MyTranslate",
+    "icon": "assets/icon",
     "directories": {
       "output": "dist"
     },
