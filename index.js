@@ -1,15 +1,21 @@
-const { app, BrowserWindow, nativeTheme, ipcMain } = require('electron');
+const { app, BrowserWindow, nativeTheme, ipcMain, nativeImage } = require('electron');
 const path = require('path');
 
 let mainWindow;
 
 function createWindow() {
+  const iconPath = path.join(__dirname, 'assets', 'icon.iconset', 'icon_512x512.png');
+  const icon = nativeImage.createFromPath(iconPath);
+  
+  // Set dock icon explicitly
+  if (process.platform === 'darwin') {
+    app.dock.setIcon(icon);
+  }
+  
   mainWindow = new BrowserWindow({
     width: 620,
     height: 420,
-    icon: process.platform === 'darwin'
-      ? path.join(__dirname, 'assets', 'icon.icns')
-      : path.join(__dirname, 'assets', 'icon.png'),
+    icon: icon,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
