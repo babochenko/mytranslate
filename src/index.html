@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTranslate</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="drag-header"></div>
+        <div class="translate-container">
+            <div class="language-bar">
+                <div class="language-section">
+                    <div class="lang-selector-container">
+                        <div class="quick-languages" id="source-quick">
+                            <button class="lang-btn active" data-lang="auto">Detect</button>
+                            <button class="lang-btn" data-lang="en">English</button>
+                            <button class="lang-btn" data-lang="ru">Russian</button>
+                            <button class="lang-btn" data-lang="pt">Portuguese</button>
+                        </div>
+                        <div class="dropdown-section">
+                            <select id="source-dropdown" class="lang-dropdown-select">
+                                <option value="">▼</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="swap-languages" class="swap-btn">⇄</button>
+                
+                <div class="language-section">
+                    <div class="lang-selector-container">
+                        <div class="quick-languages" id="target-quick">
+                            <button class="lang-btn active" data-lang="en">English</button>
+                            <button class="lang-btn" data-lang="ru">Russian</button>
+                            <button class="lang-btn" data-lang="pt">Portuguese</button>
+                        </div>
+                        <div class="dropdown-section">
+                            <select id="target-dropdown" class="lang-dropdown-select">
+                                <option value="">▼</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="translation-panels">
+                <div class="panel input-panel">
+                    <textarea 
+                        id="input-text" 
+                        placeholder="Enter text to translate..."
+                        rows="10"
+                    ></textarea>
+                    <div class="panel-footer">
+                        <span id="char-count">0</span>
+                        <button id="clear-input" class="clear-btn">Clear</button>
+                    </div>
+                </div>
+                
+                <div class="panel output-panel">
+                    <div id="output-text" class="output-content">
+                        <div class="placeholder">Translation will appear here</div>
+                    </div>
+                    <div class="panel-footer">
+                        <span id="detected-lang"></span>
+                        <button id="copy-output" class="copy-btn">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <span>Translating...</span>
+        </div>
+        
+        <div id="error" class="error hidden">
+            <span id="error-message"></span>
+            <button id="dismiss-error">×</button>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
