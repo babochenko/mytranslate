@@ -6,7 +6,11 @@
   "homepage": ".",
   "scripts": {
     "start": "electron .",
-    "dev": "electron . --dev"
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build-mac": "electron-builder --mac",
+    "build-win": "electron-builder --win",
+    "build-linux": "electron-builder --linux"
   },
   "keywords": [],
   "author": "",
@@ -14,11 +18,35 @@
   "type": "commonjs",
   "devDependencies": {
     "electron": "^37.2.3",
+    "electron-builder": "^25.1.8",
     "png2icons": "^2.0.1",
     "sharp": "^0.34.3"
   },
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",
     "translate-google": "^1.5.0"
+  },
+  "build": {
+    "appId": "com.mytranslate.app",
+    "productName": "MyTranslate",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.js",
+      "src/**/*",
+      "node_modules/**/*"
+    ],
+    "compression": "normal",
+    "buildVersion": "1.0.0",
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }
