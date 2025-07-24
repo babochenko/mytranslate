@@ -36,7 +36,13 @@ function createWindow() {
   }
 
   nativeTheme.on('updated', () => {
-    mainWindow.webContents.send('theme-updated', nativeTheme.shouldUseDarkColors);
+    if (mainWindow && !mainWindow.isDestroyed()) {
+      mainWindow.webContents.send('theme-updated', nativeTheme.shouldUseDarkColors);
+    }
+  });
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
   });
 }
 
