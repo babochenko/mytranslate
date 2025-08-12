@@ -44,6 +44,7 @@ class TranslateApp {
   initializeUI() {
     this.populateLanguageDropdowns();
     this.updateQuickLanguageButtons();
+    this.focusInput();
   }
 
   populateLanguageDropdowns() {
@@ -136,6 +137,19 @@ class TranslateApp {
     const targetDropdown = document.getElementById('target-dropdown');
     const dismissError = document.getElementById('dismiss-error');
 
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'f') {
+        e.preventDefault();
+        sourceDropdown.focus();
+        sourceDropdown.showPicker();
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === 't') {
+        e.preventDefault();
+        targetDropdown.focus();
+        targetDropdown.showPicker();
+      }
+    });
+
     inputText.addEventListener('input', (e) => {
       this.updateCharCount(e.target.value);
       this.debouncedTranslate(e.target.value);
@@ -180,6 +194,7 @@ class TranslateApp {
       if (e.target.value) {
         this.selectSourceLanguageFromDropdown(e.target.value);
         e.target.value = '';
+        this.focusInput();
       }
     });
 
@@ -187,6 +202,7 @@ class TranslateApp {
       if (e.target.value) {
         this.selectTargetLanguageFromDropdown(e.target.value);
         e.target.value = '';
+        this.focusInput();
       }
     });
 
@@ -309,6 +325,13 @@ class TranslateApp {
     setTimeout(() => {
       element.textContent = originalText;
     }, 1000);
+  }
+
+  focusInput() {
+    const inputText = document.getElementById('input-text');
+    if (inputText) {
+      inputText.focus();
+    }
   }
 
   initializeTheme() {
