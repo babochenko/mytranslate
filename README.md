@@ -1,5 +1,7 @@
 # MyTranslate
 
+![img.png](img.png)
+
 A translate app with dark mode, because Google can't make one
 
 # Hotkeys
