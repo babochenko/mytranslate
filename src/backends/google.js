@@ -1,5 +1,5 @@
 const TranslationBackend = require('./base');
-const translate1 = require('@vitalets/google-translate-api');
+const { translate: translate1 } = require('@vitalets/google-translate-api');
 const translate2 = require('translate-google');
 
 class GoogleTranslateBackend extends TranslationBackend {
@@ -30,7 +30,10 @@ class GoogleTranslateBackend extends TranslationBackend {
       console.warn('Primary translation failed, trying fallback:', error1.message);
       
       try {
-        const result = await translate2(text, { from, to });
+        // Map 'zh' to 'zh-cn' for translate-google compatibility
+        const fromLang = from === 'zh' ? 'zh-cn' : from;
+        const toLang = to === 'zh' ? 'zh-cn' : to;
+        const result = await translate2(text, { from: fromLang, to: toLang });
         return {
           text: result,
           from: from === 'auto' ? 'auto' : from,
