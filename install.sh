@@ -10,14 +10,14 @@ function volume() {
 }
 
 function detach() { 
-    hdiutil detach $(volume)
+    hdiutil detach "$(volume)"
 }
 
 # 1. build
-npm run build
+npm run build-mac
 
 # 2. attach dmg
-detach
+detach || true
 hdiutil attach "./dist/$dmg"
 
 # 3. install dmg
