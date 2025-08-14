@@ -30,10 +30,7 @@ class GoogleTranslateBackend extends TranslationBackend {
       console.warn('Primary translation failed, trying fallback:', error1.message);
       
       try {
-        // Map 'zh' to 'zh-cn' for translate-google compatibility
-        const fromLang = from === 'zh' ? 'zh-cn' : from;
-        const toLang = to === 'zh' ? 'zh-cn' : to;
-        const result = await translate2(text, { from: fromLang, to: toLang });
+        const result = await translate2(text, { from, to });
         return {
           text: result,
           from: from === 'auto' ? 'auto' : from,
@@ -59,7 +56,7 @@ class GoogleTranslateBackend extends TranslationBackend {
       'ru': 'Russian',
       'ja': 'Japanese',
       'ko': 'Korean',
-      'zh': 'Chinese',
+      'zh-cn': 'Chinese',
       'ar': 'Arabic',
       'hi': 'Hindi',
       'th': 'Thai',
