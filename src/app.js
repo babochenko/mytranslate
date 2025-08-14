@@ -151,14 +151,12 @@ class TranslateApp {
     });
 
     inputText.addEventListener('input', (e) => {
-      this.updateCharCount(e.target.value);
       this.debouncedTranslate(e.target.value);
     });
 
     clearBtn.addEventListener('click', () => {
       inputText.value = '';
       document.getElementById('output-text').innerHTML = '<div class="placeholder">Translation will appear here</div>';
-      document.getElementById('char-count').textContent = '0';
       document.getElementById('detected-lang').textContent = '';
     });
 
@@ -297,10 +295,6 @@ class TranslateApp {
     } finally {
       loading.classList.add('hidden');
     }
-  }
-
-  updateCharCount(text) {
-    document.getElementById('char-count').textContent = text.length;
   }
 
   showError(message) {
