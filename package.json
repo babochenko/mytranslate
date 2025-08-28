@@ -8,7 +8,8 @@
     "start": "electron .",
     "dev": "electron . --dev",
     "build": "electron-builder",
-    "build-mac": "electron-builder --mac",
+    "build-mac": "electron-builder --mac zip",
+    "build-mac-dev": "electron-builder --mac zip --publish never",
     "build-win": "electron-builder --win",
     "build-linux": "electron-builder --linux"
   },
@@ -24,7 +25,9 @@
   },
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",
-    "translate-google": "^1.5.0"
+    "node-fetch": "^2.7.0",
+    "translate-google": "^1.5.0",
+    "whatwg-url": "^11.0.0"
   },
   "build": {
     "appId": "com.mytranslate.app",
@@ -32,13 +35,38 @@
     "directories": {
       "output": "dist"
     },
+    "buildDependenciesFromSource": false,
+    "asar": false,
     "files": [
       "index.js",
       "src/**/*",
-      "node_modules/**/*",
-      "assets/**/*"
+      "assets/icon.icns",
+      "assets/icon.png",
+      "!assets/icon.iconset/**",
+      "!**/node_modules/**",
+      "node_modules/@vitalets/google-translate-api/**/*",
+      "node_modules/translate-google/**/*",
+      "node_modules/whatwg-url/**/*",
+      "node_modules/http-errors/**/*",
+      "node_modules/depd/**/*",
+      "node_modules/setprototypeof/**/*",
+      "node_modules/statuses/**/*",
+      "node_modules/inherits/**/*",
+      "node_modules/toidentifier/**/*",
+      "node_modules/lodash/**/*",
+      "node_modules/is-url/**/*",
+      "node_modules/num-or-not/**/*",
+      "node_modules/is-keyword-js/**/*",
+      "node_modules/user-agents/**/*",
+      "node_modules/got/**/*",
+      "node_modules/trim/**/*",
+      "node_modules/node-fetch/**/*"
     ],
-    "compression": "normal",
+    "npmRebuild": false,
+    "dmg": {
+      "writeUpdateInfo": false
+    },
+    "compression": "store",
     "buildVersion": "1.0.0",
     "mac": {
       "category": "public.app-category.productivity",

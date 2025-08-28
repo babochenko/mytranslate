@@ -18,14 +18,21 @@ function createWindow() {
     icon: icon,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
+      webSecurity: false
     },
     titleBarStyle: 'hiddenInset',
     show: false
   });
 
-  mainWindow.loadFile('src/index.html');
+  const htmlPath = path.join(__dirname, 'src', 'index.html');
+  console.log('Loading HTML from:', htmlPath);
+  mainWindow.loadFile(htmlPath);
   
+  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
+    console.error('Failed to load:', errorCode, errorDescription, validatedURL);
+  });
+
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
     mainWindow.webContents.send('theme-updated', nativeTheme.shouldUseDarkColors);

@@ -329,12 +329,19 @@ class TranslateApp {
   }
 
   initializeTheme() {
-    const { ipcRenderer } = require('electron');
-    
-    ipcRenderer.on('theme-updated', (event, shouldUseDarkColors) => {
-      const theme = shouldUseDarkColors ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-    });
+    try {
+      const { ipcRenderer } = require('electron');
+      
+      ipcRenderer.on('theme-updated', (event, shouldUseDarkColors) => {
+        const theme = shouldUseDarkColors ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      });
+    } catch (error) {
+      console.warn('Could not initialize theme listener:', error);
+      // Fallback to system preference detection
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    }
   }
 }
 
