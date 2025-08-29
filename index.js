@@ -35,6 +35,8 @@ function createWindow() {
   });
 
   mainWindow.once('ready-to-show', () => {
+    mainWindow.setAlwaysOnTop(true);
+    mainWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
     mainWindow.show();
     mainWindow.webContents.send('theme-updated', nativeTheme.shouldUseDarkColors);
   });
