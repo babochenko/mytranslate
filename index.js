@@ -36,6 +36,10 @@ function createWindow() {
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
+    if (process.platform === 'darwin') {
+      app.focus({ steal: true });
+    }
+    mainWindow.focus();
     mainWindow.webContents.send('theme-updated', nativeTheme.shouldUseDarkColors);
   });
 
@@ -65,5 +69,11 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
+  } else if (mainWindow) {
+    mainWindow.show();
+    if (process.platform === 'darwin') {
+      app.focus({ steal: true });
+    }
+    mainWindow.focus();
   }
 });

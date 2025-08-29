@@ -324,7 +324,7 @@ class TranslateApp {
   focusInput() {
     const inputText = document.getElementById('input-text');
     if (inputText) {
-      inputText.focus();
+      setTimeout(() => inputText.focus(), 0);
     }
   }
 
