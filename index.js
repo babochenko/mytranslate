@@ -16,6 +16,7 @@ function createWindow() {
     width: 620,
     height: 420,
     icon: icon,
+    transparent: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
